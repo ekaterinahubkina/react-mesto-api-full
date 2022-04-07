@@ -1,0 +1,15 @@
+.logo__image {
+    margin-bottom: 41px;
+    max-width: 142px;
+    min-height: 33px;
+    object-fit: contain;
+}
+
+@media screen and (max-width: 767px) {
+    .logo__image {
+        max-width: 103.74px;
+        min-height: 24.4px;
+        margin: 0 0 31.6px 27px;
+
+    }
+}

@@ -1,0 +1,23 @@
+.profile__info {
+    margin-left: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    grid-template-rows: repeat(2, min-content);
+    grid-template-areas: 
+    "name edit-button"
+    "occupation .";
+    grid-column-gap: 18px;
+    grid-row-gap: 16px;
+    align-items: center;
+    min-height: 73px;
+}
+
+@media screen and (max-width: 767px) {
+    .profile__info {
+        flex-direction: column;
+        margin: 22.25px 0 36px 30px;
+        grid-column-gap: 10px;
+        grid-row-gap: 14px;
+    }
+    
+}

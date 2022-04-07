@@ -1,0 +1,15 @@
+.card {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    grid-template-rows: repeat(2, max-content);
+    grid-template-areas: 
+    "image image"
+    "title like-button";
+    grid-row-gap: 25px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    max-width: 282px;
+    min-height: 361px;
+    margin: auto;
+    position: relative;
+}

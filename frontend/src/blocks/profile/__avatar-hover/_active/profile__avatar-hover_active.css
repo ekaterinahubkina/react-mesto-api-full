@@ -1,0 +1,5 @@
+.profile__avatar-hover_active {
+    visibility: visible;
+    opacity: 1;
+    z-index: 1;
+}

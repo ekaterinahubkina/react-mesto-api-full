@@ -1,0 +1,15 @@
+.burger-menu {
+    display: none;
+}
+
+@media screen and (max-width: 767px) {
+    .burger-menu {
+        display: flex;
+        flex-direction: column;
+        margin-right: 30px;
+        transition: all .5s ease-in;
+    }
+    .burger-menu:hover {
+        opacity: .6;
+    }   
+}

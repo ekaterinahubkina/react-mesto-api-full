@@ -8,6 +8,7 @@ const auth = require('./middlewares/auth');
 const errorHandler = require('./middlewares/errorHandler');
 const { register } = require('./middlewares/validation');
 const ErrorNotFound = require('./errors/ErrorNotFound');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 
@@ -23,6 +24,8 @@ app.use(cors({
   credentials: true,
 }));
 
+app.use(requestLogger);
+
 app.post('/signin', register, login);
 app.post('/signup', register, createUser);
 
@@ -34,6 +37,8 @@ app.use('/cards', require('./routes/cards'));
 app.use((req, res, next) => {
   next(new ErrorNotFound('Неправильный путь'));
 });
+
+app.use(errorLogger);
 
 app.use(errors());
 

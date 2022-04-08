@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
+const cors = require('cors');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const errorHandler = require('./middlewares/errorHandler');
@@ -16,6 +17,11 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 mongoose.connect('mongodb://localhost:27017/mestodb');
+
+app.use(cors({
+  origin: 'http://mesto.hubkina.nomoredomains.work',
+  credentials: true,
+}));
 
 app.post('/signin', register, login);
 app.post('/signup', register, createUser);

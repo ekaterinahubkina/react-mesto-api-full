@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'mesto.hubkina.nomoredomains.work'],
+  origin: ['http://localhost:3000', 'https://mesto.hubkina.nomoredomains.work'],
   credentials: true,
 }));
 

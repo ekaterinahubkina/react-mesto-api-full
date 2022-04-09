@@ -5,7 +5,8 @@ const ErrorForbidden = require('../errors/ErrorForbidden');
 
 module.exports.getCards = (req, res, next) => {
   Card.find({})
-    .then((cards) => res.send({ data: cards }))
+    .populate('likes')
+    .then((cards) => res.send({ cards }))
     .catch((err) => next(err));
 };
 
@@ -21,7 +22,7 @@ module.exports.createCard = (req, res, next) => {
   Card.create({
     name, link, owner: req.user._id, likes, createdAt,
   })
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new ErrorValidation('Некорректные данные'));
@@ -57,7 +58,8 @@ module.exports.likeCard = (req, res, next) => {
     .orFail(() => {
       throw new ErrorNotFound('Карточка не найдена');
     })
-    .then((card) => res.send({ data: card }))
+    .populate('likes')
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new ErrorValidation('Неверный _id карточки'));
@@ -72,7 +74,8 @@ module.exports.dislikeCard = (req, res, next) => {
     .orFail(() => {
       throw new ErrorNotFound('Карточка не найдена');
     })
-    .then((card) => res.send({ data: card }))
+    .populate('likes')
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new ErrorValidation('Неверный _id карточки'));

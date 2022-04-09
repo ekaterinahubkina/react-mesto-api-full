@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -10,7 +11,7 @@ const { register } = require('./middlewares/validation');
 const ErrorNotFound = require('./errors/ErrorNotFound');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 
 const app = express();
 app.use(express.json());
@@ -20,11 +21,17 @@ app.use(bodyParser.json());
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
 app.use(cors({
-  origin: 'http://mesto.hubkina.nomoredomains.work',
+  origin: ['http://localhost:3000', 'mesto.hubkina.nomoredomains.work'],
   credentials: true,
 }));
 
 app.use(requestLogger);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.post('/signin', register, login);
 app.post('/signup', register, createUser);
